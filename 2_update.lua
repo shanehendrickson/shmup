@@ -24,7 +24,7 @@ function update_game()
             local newbul=makespr()
             newbul.x=ship.x+1
             newbul.y=ship.y-3
-            newbul.spr=17
+            newbul.spr=16
             newbul.colw=5
             add(buls,newbul)
         
@@ -97,13 +97,7 @@ function update_game()
                     myen.flash=2
                 end
                 if myen.hp<=0 then
-                    del(enemies,myen)
-                    sfx(2)
-                    score+=1                    
-                    explode(myen.x,myen.y)
-
-                    
-                    
+                    killen(myen)
                 end
             end
         end
@@ -132,7 +126,7 @@ function update_game()
     end
 
     --pick an enemy
-    picking()
+    picktimer()
 
 
     --animate flame

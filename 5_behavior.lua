@@ -66,29 +66,47 @@ function doenemy(myen)
     end
 end
 
-function picking()
+function picktimer()
     --escape if there are no enemies to pick from
     if mode!="game" then
         return
     end
 
     if t%attackfreq==0 then
-        local maxnum=min(10,#enemies)
-
-        local myindex=flr(rnd(maxnum))
-
-        myindex=#enemies-myindex
-        local myen=enemies[myindex]
-        if myen.mission=="protect" then
-            myen.mission="attack"
-            myen.anispd*=3
-            myen.wait=60
-            myen.shake=60
-        end        
+        pickattack()
     end
+end
+
+function pickattack()
+    local maxnum=min(10,#enemies)
+    local myindex=flr(rnd(maxnum))
+
+    myindex=#enemies-myindex
+    local myen=enemies[myindex]
+
+    if myen==nil then return end -- problem with empty enemy array
+    if myen.mission=="protect" then
+        myen.mission="attack"
+        myen.anispd*=3
+        myen.wait=60
+        myen.shake=60
+    end 
 end
 
 function move(obj)
     obj.x+=obj.sx
     obj.y+=obj.sy
+end
+
+function killen(myen)
+    del(enemies,myen)
+    sfx(2)
+    score+=1                    
+    explode(myen.x,myen.y)
+
+    if myen.mission=="attack" then
+        if rnd()<0.5 then
+            pickattack()            
+        end
+    end
 end
