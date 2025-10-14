@@ -26,6 +26,7 @@ function update_game()
             newbul.y=ship.y-3
             newbul.spr=16
             newbul.colw=5
+            newbul.sy=-4
             add(buls,newbul)
         
             sfx(0)
@@ -54,12 +55,20 @@ function update_game()
     end
 
     --move the bullets
-    for i=#buls,1,-1 do
-        local mybul=buls[i]
-        mybul.y=mybul.y-4
+    for mybul in all(buls) do
+        move(mybul)
         
         if mybul.y<-8 then
             del(buls,mybul)
+        end
+    end
+
+    --move enemy bullets
+    for myebul in all(ebuls) do        
+        move(myebul)
+        animate(myebul)
+        if myebul.y>128 or myebul.x<-8 or myebul.x>128 or myebul.y<-8 then
+            del(ebuls,myebul)
         end
     end
 
@@ -69,11 +78,7 @@ function update_game()
         doenemy(myen)
 
         -- enemy animation
-        myen.aniframe+=myen.anispd
-        if flr(myen.aniframe)>#myen.ani then
-            myen.aniframe=1
-        end
-        myen.spr=myen.ani[flr(myen.aniframe)]
+        animate(myen)
         
         
         --enemy leaving screen
@@ -118,11 +123,23 @@ function update_game()
         
     end
 
+    --collision ship x enemy bullets
     if lives<=0 then
         mode="over"
         lockout=t+30
         music(6)
         return
+    end
+
+    if invul<=0 then
+        for myebul in all(ebuls) do
+            if col(myebul,ship) then
+                explode(ship.x+4, ship.y+4,true)
+                lives-=1
+                sfx(1)
+                invul=60
+            end
+        end        
     end
 
     --pick an enemy

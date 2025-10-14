@@ -74,6 +74,11 @@ function draw_game()
             end
         end
     end
+
+    --drawing enemy bullets
+    for myebul in all(ebuls) do
+        drwmyspr(myebul)
+    end
     
     print("score:"..score,40,1,12)
     

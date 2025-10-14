@@ -82,7 +82,7 @@ function startgame()
     invul=0
 
     attackfreq=60
-    
+    nextfire=0
     stars={} 
     for i=1,100 do
         local newstar={}
@@ -93,7 +93,7 @@ function startgame()
     end 
     
     buls={}
-    
+    ebuls={}
     enemies={}
 
     parts={}

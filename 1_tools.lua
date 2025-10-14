@@ -45,6 +45,13 @@ function drwmyspr(myspr)
             sprx+=1
         end
     end
+    --workaround for "hitbox"
+    --future - change collision detection to account for a hitbox
+    if myspr.bulmode then
+        sprx-=2
+        spry-=2
+    end
+
     spr(myspr.spr,sprx,spry,myspr.sprw,myspr.sprh)
 end
 

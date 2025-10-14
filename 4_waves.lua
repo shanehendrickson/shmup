@@ -10,6 +10,7 @@ function spawnwave()
             {1,1,1,1,1,1,1,1,1,1},
             {1,1,1,1,1,1,1,1,1,1}
         })
+        
     elseif wave==2 then
         attackfreq=60
         placens({

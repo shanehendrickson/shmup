@@ -72,9 +72,27 @@ function picktimer()
         return
     end
 
+    if t>nextfire then
+        pickfire()
+        nextfire=t+20+rnd(20)
+    end
+
     if t%attackfreq==0 then
         pickattack()
     end
+end
+
+function pickfire()
+    local maxnum=min(10,#enemies)
+    local myindex=flr(rnd(maxnum))
+
+    myindex=#enemies-myindex
+    local myen=enemies[myindex]
+
+    if myen==nil then return end -- problem with empty enemy array
+    if myen.mission=="protect" then
+        fire(myen)
+    end 
 end
 
 function pickattack()
@@ -109,4 +127,12 @@ function killen(myen)
             pickattack()            
         end
     end
+end
+
+function animate(myen)
+    myen.aniframe+=myen.anispd
+    if flr(myen.aniframe)>#myen.ani then
+        myen.aniframe=1
+    end
+    myen.spr=myen.ani[flr(myen.aniframe)]
 end
