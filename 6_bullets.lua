@@ -22,6 +22,7 @@ function fire(myen,ang,spd)
     myen.flash=4
     add(ebuls,myebul)
     sfx(29)
+    return myebul
 end
 
 function firespread(myen,num,spd,base)    
@@ -35,6 +36,8 @@ end
 
 function aimedfire(myen,spd)
     --atan2(y2-y1,x2-x1) -- calculate angle between two points
-    local ang=atan2(ship.y-myen.y,ship.x-myen.x)
-    fire(myen,ang,spd)
+    local myebul=fire(myen,0,spd)
+    local ang=atan2((ship.y+4)-myebul.y,(ship.x+4)-myebul.x)
+    myebul.sx=sin(ang)*spd
+    myebul.sy=cos(ang)*spd
 end
