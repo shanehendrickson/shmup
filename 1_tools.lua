@@ -187,7 +187,7 @@ function big_shwave(shx,shy)
 end
 
 
-function smol_spark(sx,sy)
+function smol_spark(sx,sy,isblue)
     for i=1,rnd(3)+1 do
         local myp={}
         myp.x=sx

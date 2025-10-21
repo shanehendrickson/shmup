@@ -1,11 +1,15 @@
 -- todo --
 -- ----------------
--- enemy behavior
 
 -- enemy bullets
+-- -aimed bullets
+-- -spread short_src
 -- pickups
 -- bombs?
+
 -- boss
+
+-- scoring
 -- nicer screens
 
 function _init()
@@ -59,7 +63,7 @@ end
 function startgame()
     
     t=0
-    wave=0
+    wave=1
     nextwave()
     
     ship=makespr()

@@ -14,6 +14,7 @@ function doenemy(myen)
         
         if abs(myen.y-myen.posy)<0.7 then
             myen.y=myen.posy
+            myen.x=myen.posx
             myen.mission="protect"
         end
 
@@ -58,9 +59,15 @@ function doenemy(myen)
         elseif myen.type==4 then
             --big yellow ship
             myen.sy=0.35
+
             if myen.y>110 then
                 myen.sy=1
+            else
+                if t%25==0 then
+                    firespread(myen,8,1.3,rnd())
+                end
             end
+
         end
         move(myen)
     end
@@ -68,7 +75,7 @@ end
 
 function picktimer()
     --escape if there are no enemies to pick from
-    if mode!="game" then
+    if mode~="game" then
         return
     end
 
@@ -91,7 +98,13 @@ function pickfire()
 
     if myen==nil then return end -- problem with empty enemy array
     if myen.mission=="protect" then
-        fire(myen)
+        if myen.type==4 then
+            firespread(myen,8,1.3,rnd())
+        elseif myen.type==2 then
+            aimedfire(myen,2)
+        else    
+            fire(myen,0,2)
+        end
     end 
 end
 
@@ -105,7 +118,7 @@ function pickattack()
     if myen==nil then return end -- problem with empty enemy array
     if myen.mission=="protect" then
         myen.mission="attack"
-        myen.anispd*=3
+        myen.anispd=myen.anispd*3
         myen.wait=60
         myen.shake=60
     end 
