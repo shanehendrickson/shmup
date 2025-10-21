@@ -115,6 +115,7 @@ function update_game()
             if col(myen,ship) then
                 explode(ship.x+4, ship.y+4,true)
                 lives-=1
+                shake=4
                 sfx(1)
                 invul=60
             end
@@ -136,6 +137,7 @@ function update_game()
             if col(myebul,ship) then
                 explode(ship.x+4, ship.y+4,true)
                 lives-=1
+                shake=4
                 sfx(1)
                 invul=60
             end

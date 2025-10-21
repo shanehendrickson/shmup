@@ -2,8 +2,6 @@
 -- ----------------
 
 -- enemy bullets
--- -aimed bullets
--- -spread short_src
 -- pickups
 -- bombs?
 
@@ -19,6 +17,7 @@ function _init()
     blinkt=1
     t=0
     lockout=0
+    shake=0
 end
 
 function _update()
@@ -40,6 +39,7 @@ function _update()
 end
 
 function _draw()
+    doshake()
     
     if mode=="game" then
         draw_game()
@@ -63,7 +63,7 @@ end
 function startgame()
     
     t=0
-    wave=1
+    wave=0
     nextwave()
     
     ship=makespr()
@@ -82,7 +82,7 @@ function startgame()
     
     score=0
     
-    lives=1
+    lives=4
     invul=0
 
     attackfreq=60

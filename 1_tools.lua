@@ -75,7 +75,7 @@ function col(a,b)
 end
 
 function explode(expx,expy,isblue)
-
+    
     local myp={}
     myp.x=expx
     myp.y=expy
@@ -225,3 +225,32 @@ function makespr()
     }
     return myspr
 end
+
+function doshake()
+    local shakex=rnd(shake)-(shake/2)
+    local shakey=rnd(shake)-(shake/2)
+    camera(shakex,shakey)
+    if shake>10 then
+        shake*=0.9
+    else
+        shake-=1
+        if shake<1 then
+            shake=0
+        end
+    end
+end
+
+--[[
+Jan Willem Nijman simple screenshake
+
+view_xview = viewx+random(shake)-shake/2
+view_yview = viewy+random(shake)-shake/2
+
+if shake > 0
+shake -=1
+else
+shake = 0
+
+if shake > 10
+shake *= 0.9
+]]
