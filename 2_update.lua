@@ -18,6 +18,15 @@ function update_game()
     if btn(3) then
         ship.sy=2
     end
+
+    if btnp(4) then
+        if cherry>0 then
+            cherrybomb(cherry)
+            cherry=0
+        else
+            sfx(32)
+        end
+    end
     
     if btn(5) then
         if bultimer<=0 then
@@ -27,6 +36,7 @@ function update_game()
             newbul.spr=16
             newbul.colw=5
             newbul.sy=-4
+            newbul.dmg=1
             add(buls,newbul)
         
             sfx(0)
@@ -72,6 +82,14 @@ function update_game()
         end
     end
 
+    --move pickups
+    for mypick in all(pickups) do        
+        move(mypick)
+        if mypick.y>128  then
+            del(pickups,mypick)
+        end
+    end
+
     --moving enemies 
     for myen in all(enemies) do
         --enemy mission
@@ -97,7 +115,7 @@ function update_game()
                 smol_shwave(mybul.x,mybul.y)
                 smol_spark(myen.x+4,myen.y+4)
                 if myen.hp>0 then
-                    myen.hp-=1
+                    myen.hp-=mybul.dmg
                     sfx(3)
                     myen.flash=2
                 end
@@ -120,8 +138,7 @@ function update_game()
                 invul=60
             end
         end
-    else invul-=1
-        
+    else invul-=1        
     end
 
     --collision ship x enemy bullets
@@ -144,6 +161,14 @@ function update_game()
         end        
     end
 
+    --collision pickup x ships
+    for mypick in all(pickups) do
+        if col(mypick,ship) then
+            del(pickups,mypick)
+            plogic(mypick)
+        end
+    end
+
     --pick an enemy
     picktimer()
 
@@ -164,6 +189,8 @@ function update_game()
     if mode=="game" and #enemies==0 then
         nextwave()
     end
+
+    
 end --update_game
 
 function update_start()

@@ -36,6 +36,13 @@ function blink()
     return banim[blinkt]
 end
 
+function drawoutl(myspr)
+    spr(myspr.spr,myspr.x+1,myspr.y,myspr.sprw,myspr.sprh)
+    spr(myspr.spr,myspr.x-1,myspr.y,myspr.sprw,myspr.sprh)
+    spr(myspr.spr,myspr.x,myspr.y+1,myspr.sprw,myspr.sprh)
+    spr(myspr.spr,myspr.x,myspr.y-1,myspr.sprw,myspr.sprh)
+end
+
 function drwmyspr(myspr)
     local sprx=myspr.x
     local spry=myspr.y
@@ -165,13 +172,16 @@ function page_blue(page)
     return col
 end
 
-function smol_shwave(shx,shy)
+function smol_shwave(shx,shy,shcol)
+    if shcol==nil then
+        shcol=9
+    end
     local mysw={}
     mysw.x=shx
     mysw.y=shy
     mysw.r=3
     mysw.tr=6
-    mysw.col=9
+    mysw.col=shcol
     mysw.speed=1
     add(shwaves,mysw)
 end
@@ -238,6 +248,20 @@ function doshake()
             shake=0
         end
     end
+end
+
+function popfloat(fltxt,flx,fly)
+    local fl={
+        x=flx,
+        y=fly,
+        txt=fltxt,
+        age=0
+    }
+    add(floats,fl)
+end
+
+function cprint(txt,x,y,c)
+    print(txt,x-#txt*2,y,c)
 end
 
 --[[

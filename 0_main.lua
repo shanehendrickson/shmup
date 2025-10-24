@@ -1,14 +1,13 @@
--- todo --
--- ----------------
-
--- enemy bullets
--- pickups
--- bombs?
-
--- boss
-
--- scoring
--- nicer screens
+--[[
+    
+    bombs?
+    
+    scoring
+    
+    boss
+    
+    nicer screens
+]]
 
 function _init()
     cls(0) -- clear screen
@@ -64,6 +63,7 @@ function startgame()
     
     t=0
     wave=0
+    lastwave=9
     nextwave()
     
     ship=makespr()
@@ -81,7 +81,7 @@ function startgame()
     muzzle=0
     
     score=0
-    
+    cherry=0
     lives=4
     invul=0
 
@@ -103,5 +103,9 @@ function startgame()
     parts={}
 
     shwaves={}
+
+    pickups={}
+
+    floats={}
 
 end
