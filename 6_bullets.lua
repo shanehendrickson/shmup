@@ -4,9 +4,12 @@ function fire(myen, ang, spd)
     local myebul = makespr()
     myebul.x = myen.x + 3
     myebul.y = myen.y + 6
-    if myen.type == 3 then
+    if myen.type == 4 then
         myebul.x = myen.x + 7
         myebul.y = myen.y + 13
+    elseif myen.boss then
+        myebul.x = myen.x + 15
+        myebul.y = myen.y + 23
     end
     myebul.spr = 32
     myebul.ani = { 32, 33, 34, 33 }
@@ -18,8 +21,9 @@ function fire(myen, ang, spd)
     myebul.colw = 2
     myebul.colh = 2
     myebul.bulmode = true
-
-    myen.flash = 4
+    if myen.boss != true then
+        myen.flash = 4
+    end
     add(ebuls, myebul)
     sfx(29)
     return myebul
@@ -44,9 +48,9 @@ end
 
 function cherrybomb(cherry)
     local spc = 0.25 / (cherry * 2)
-    
+
     for i = 0, cherry * 2 do
-        local ang=0.375+spc*i
+        local ang = 0.375 + spc * i
         local newbul = makespr()
         newbul.x = ship.x
         newbul.y = ship.y - 3
@@ -57,8 +61,8 @@ function cherrybomb(cherry)
 
         add(buls, newbul)
     end
-    big_shwave(ship.x,ship.y)
-    shake=cherry
+    big_shwave(ship.x, ship.y)
+    shake = cherry
     muzzle = 5
-    invul=60
+    invul = 60
 end

@@ -78,8 +78,8 @@ function spawnwave()
         --boss
         attacfreq = 60
         placens({
+            { 0, 0, 0, 0, 5, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 4, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
         })
@@ -154,6 +154,24 @@ function spawnen(entype, enx, eny, enwait)
         myen.sprh = 2
         myen.colw = 16
         myen.colh = 16
+    elseif entype==5 then
+        -- boss
+        myen.spr = 68
+        myen.hp = 200
+        myen.ani = { 68, 72, 76, 72 }
+        myen.sprw = 4
+        myen.sprh = 3
+        myen.colw = 32
+        myen.colh = 24
+
+        myen.x=48
+        myen.y=-24
+
+        myen.posx=48
+        myen.posy=25
+
+        myen.boss=true
+        
     end
 
     add(enemies, myen)

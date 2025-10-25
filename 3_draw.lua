@@ -14,7 +14,6 @@ function draw_game()
         end
     end
 
-
     --drawing enemy bullets
     for myebul in all(ebuls) do
         drwmyspr(myebul)
@@ -22,15 +21,17 @@ function draw_game()
 
     --floats
     for myfl in all(floats) do
-        cprint(myfl.txt,myfl.x,myfl.y,7)
-        myfl.y-=0.5
-        myfl.age+=1
-        if myfl.age>60 then
-            del(floats,myfl)
+        local mycol = 7
+        if t % 4 < 2 then
+            mycol = 8
+        end
+        cprint(myfl.txt, myfl.x, myfl.y, 7)
+        myfl.y -= 0.5
+        myfl.age += 1
+        if myfl.age > 60 then
+            del(floats, myfl)
         end
     end
-
-    
 
     --drawing pickups
     for mypick in all(pickups) do
@@ -49,10 +50,18 @@ function draw_game()
     --drawing enemies
     for myen in all(enemies) do
         if myen.flash > 0 then
-            myen.flash -= 1
-            for i = 1, 15 do
-                pal(i, 7)
+            if t % 4 < 2 then
+                pal(3, 8)
+                pal(11, 14)
             end
+            if myen.boss then
+                myen.spr = 64
+            else
+                for i = 1, 15 do
+                    pal(i, 7)
+                end
+            end
+            myen.flash -= 1
         end
         drwmyspr(myen)
         pal()

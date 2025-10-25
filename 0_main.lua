@@ -1,11 +1,8 @@
---[[
-    
-    bombs?
-    
-    scoring
+--[[  
     
     boss
     
+    scoring
     nicer screens
 ]]
 
@@ -17,6 +14,8 @@ function _init()
     t=0
     lockout=0
     shake=0
+
+    debug="debugging"
 end
 
 function _update()
@@ -51,7 +50,7 @@ function _draw()
     elseif mode=="win" then
         draw_win()
     end
-    
+    print(debug,2,9,7)
 end
 
 function startscreen()
@@ -62,7 +61,7 @@ end
 function startgame()
     
     t=0
-    wave=0
+    wave=8
     lastwave=9
     nextwave()
     

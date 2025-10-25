@@ -8,19 +8,42 @@ function doenemy(myen)
     if myen.mission == "flyin" then
         --flying in
         --basic easing function: x+=(targetx-x)/n
+        local dx = (myen.posx - myen.x) / 7 --ease in
+        local dy = (myen.posy - myen.y) / 7
 
-        myen.x += (myen.posx - myen.x) / 7 --ease in
-        myen.y += (myen.posy - myen.y) / 7
+        if myen.boss then
+            -- myen.x+=min(dx,1)
+            myen.y += min(dy, 1)
+        else
+            myen.x += dx
+            myen.y += dy
+        end
 
         if abs(myen.y - myen.posy) < 0.7 then
             myen.y = myen.posy
             myen.x = myen.posx
-            myen.mission = "protect"
+            if myen.boss then
+                myen.mission = "boss1"
+                myen.phbegin=t
+            else
+                myen.mission = "protect"
+            end
         end
     elseif myen.mission == "protect" then
         --staying putting
+    
+    elseif myen.mission == "boss1" then
+        boss1(myen)
+    elseif myen.mission == "boss2" then
+        boss2(myen)
+    elseif myen.mission == "boss3" then
+        boss3(myen)
+    elseif myen.mission == "boss4" then
+        boss4(myen)
+    elseif myen.mission == "boss5" then
+        boss5(myen)
 
-        --this enemy attack pattern would be great for an enemy class
+        
     elseif myen.mission == "attack" then
         --attack
         if myen.type == 1 then
@@ -153,6 +176,7 @@ function killen(myen)
         end
         --enemies who are attacking are more likely to drop pickups
         cherrychance = 0.2
+        popfloat("100", myen.x + 4, myen.y + 4)
     end
 end
 
@@ -168,22 +192,21 @@ end
 function plogic(mypick)
     cherry += 1
     smol_shwave(mypick.x + 4, mypick.y + 4, 14)
-    if cherry==10 then
+    if cherry == 10 then
         --get a life
-        if lives<4 then
-            lives+=1
+        if lives < 4 then
+            lives += 1
             sfx(31)
-            cherry=0
-            popfloat("1up!",mypick.x+4,mypick.y+4)
+            cherry = 0
+            popfloat("1up!", mypick.x + 4, mypick.y + 4)
         else
             --????
-            score+=100
-            cherry=0
+            score += 100
+            cherry = 0
         end
     else
         sfx(30)
     end
-
 end
 
 function animate(myen)
