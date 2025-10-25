@@ -23,9 +23,12 @@ function fire(myen, ang, spd)
     myebul.bulmode = true
     if myen.boss != true then
         myen.flash = 4
+        sfx(29)
+    else
+        sfx(34)
+
     end
     add(ebuls, myebul)
-    sfx(29)
     return myebul
 end
 

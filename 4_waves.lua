@@ -168,7 +168,7 @@ function spawnen(entype, enx, eny, enwait)
         myen.y=-24
 
         myen.posx=48
-        myen.posy=25
+        myen.posy=8
 
         myen.boss=true
         
